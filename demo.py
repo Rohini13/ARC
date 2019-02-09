@@ -2,10 +2,19 @@ from flask import Flask, jsonify
 from flask import abort, request
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 app = Flask(__name__)
+from flask import send_from_directory
+from flask import render_template
 
 @app.route("/",methods=["GET"])
 def hello():
   return "hello"
+
+@app.route("/submit")
+def submit():
+  #root_dir = os.path.dirname(os.getcwd())
+  return render_template('submit.html')
+  #return app.send_static_file('submit.html')
+
 
 @app.route("/", methods=["POST"])
 def sentiment_scores():
@@ -23,7 +32,7 @@ def sentiment_scores():
           print("Sentence Overall Rated As") 
     
           if sentiment_dict['compound'] >= 0.05 : 
-            return("Positive") 
+           return("Positive") 
     
           elif sentiment_dict['compound'] <= - 0.05 : 
             return("Negative") 

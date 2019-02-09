@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Sentiment analyser</title>  
+<style>
+body {
+    background-image:url('/home/mishra/programs/shehacks/sentiment-analysis.jpg');
+    font-family:Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif;
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+
+}
+footer{
+    border: 1px solid transparent;
+    margin-top:50%;
+    text-align:center;
+
+}
+div{
+    font-size:30px;
+    color:white;
+}
+</style>
+</head>  
+<body>
+Hello
+<form name="senty" action="/" onsubmit="return validate() " method="post" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;text-align: center"> 
+<div><b>Type something!</b></div><br><input type="text" id="text_analyzed" name="text_to_be_analyzed"><br><br>
+<button type="submit" style="background-color:whitesmoke;padding: 28px 28px;border:1px solid black;color:black;padding: 5px 30px;text-align: center;text-decoration:darkslateblue;display: inline-block;font-size: 16px;">Submit</button>
+</form>
+<p id="rohini"></p>
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+   
+  
+  <script > 
+    function validate()
+    {
+      var x=document.forms["senty"]["text_to_be_analyzed"].value;
+      if(x=="")
+      {
+        alert("you have to type something");
+        return false;
+      }
+    }
+    function output()
+    {
+     /*var xhttp=newXMLHttpRequest();
+     xhttp.onreadystatechange=function(){
+      document.getElementById("rohini").innerHTML=this.responseText;
+     } ;
+     xhttp.open("POST","/home/mishra/programs/shehacks/demo.py/sentiment_scores()",true);
+     xhttp.send();*/
+     $.ajax({
+      url: '../demo.py',
+		        type: 'post',
+		        data: {input: document.getElementById('text_analyzed').innerText},
+		        success: function(data) {
+              console.log(data);
+            }
+     });
+     }
+    </script>
+</body>
+</html>
