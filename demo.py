@@ -10,14 +10,9 @@ def hello():
 @app.route("/", methods=["POST"])
 def sentiment_scores():
           sentence=request.json
-          x = sentence["text"]
-          # return "Hello"
-        # Create a SentimentIntensityAnalyzer object. 
+          x = sentence["text"] 
           sid_obj = SentimentIntensityAnalyzer() 
-     
-        # polarity_scores method of SentimentIntensityAnalyzer 
-        # oject gives a sentiment dictionary. 
-        # which contains pos, neg, neu, and compound scores. 
+      
           sentiment_dict = sid_obj.polarity_scores(x) 
 
           print("Overall sentiment dictionary is : ", sentiment_dict) 
@@ -27,7 +22,6 @@ def sentiment_scores():
     
           print("Sentence Overall Rated As") 
     
-        # decide sentiment as positive, negative and neutral 
           if sentiment_dict['compound'] >= 0.05 : 
             return("Positive") 
     
